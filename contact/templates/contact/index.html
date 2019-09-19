@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block mainPost %}
+<form method="post" class="">
+{% csrf_token %}
+
+<div class="col-sm-6">
+    <div class="form-group has-success ">
+    <label class="control-label" for="inputSuccess">{{ data_form.nama.label_tag }} </label>
+    {{ data_form.nama}}
+
+</div>
+
+<div class="form-group has-success ">
+    <label class="control-label" for="inputSuccess">{{ data_form.email.label_tag }} </label>
+    {{ data_form.email}}
+
+</div>
+
+    <div class="form-group has-success ">
+    <label class="control-label" for="inputSuccess">{{ data_form.pesan.label_tag }} </label>
+    {{ data_form.pesan}}
+
+</div>
+
+        <div class="form-group has-success ">
+    <label class="control-label" for="inputSuccess">{{ data_form.tanggal_lahir.label_tag }} </label>
+    {{ data_form.tanggal_lahir}}
+
+</div>
+
+
+{#<div class="form-group has-success">#}
+{#<label class="">{{data_form.jenis_kelamin.label_tag}}</label>#}
+{#    {% for radio in data_form.jenis_kelamin %}#}
+{#    <div class="form-check">#}
+{#    {{ radio.tag }}#}
+{#    <label for="{{ radio.id_for_label }}" class="form-check-label">#}
+{#        {{ radio.label }}#}
+{#    </label>#}
+{#    </div>#}
+{#{% endfor %}#}
+{##}
+{#    {{ data_form.jenis_kelamin }}#}
+{#</div>#}
+
+<div class="form-group has-success">
+    {{ data_form.jenis_kelamin.label_tag }}
+    {% for radio, choice in data_form.jenis_kelamin.field.widget.choices %}
+    <div class="custom-control custom-radio custom-control-inline">
+        <input id="id_{{data_form.jenis_kelamin.name}}_{{ forloop.counter0 }}" name="{{data_form.jenis_kelamin.name}}" type="{{data_form.jenis_kelamin.field.widget.input_type}}" value="{{pk}}" class="custom-control-input"
+         {% ifequal data_form.jenis_kelamin.data pk.0 %}
+           checked="checked"
+         {% endifequal %}/>
+        <label for="id_{{data_form.jenis_kelamin.name}}_{{ forloop.counter0 }}" class="custom-control-label">{{ choice }}</label>
+
+    </div>
+{% endfor %}
+</div>
+
+    <div class="form-group">
+        {{ data_form.agree.label_tag }}
+        {{ data_form.agree }}
+    </div>
+
+    <button class="" type="submit">Kirim</button>
+</form>
+
+{% endblock mainPost %}

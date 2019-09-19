@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block mainPost %}
+        {%  for post in postingIndex %}
+                <div class="col-lg-4">
+                <div class="well">
+                    <img src="{{ post.cover.url }}" alt="{{ post.title }}" style="height: 37%; width: 100%;">
+                </div>
+                    <div class="panel panel-success">
+                        <div class="panel-heading">
+                            <a href="blog/post/{{ post.slug }}">{{post.title}}</a>
+
+                        </div>
+                        <div class="panel-body">
+                            <p>{{ post.body|truncatechars:277|safe}}</p>
+                        </div>
+                        <div class="panel-footer">
+                            {{ post.update}} | {{ post.category }}
+                        </div>
+                    </div>
+                </div>
+    {% endfor %}
+                {% endblock mainPost %}
+
+
+            {% block label %}
+                          {% for label in categoriesIndex %}
+                        <li>
+                            <a href="{% url 'blog:category' categoryInput=label.category %}"><i class="fa fa-dashboard fa-fw"></i> {{label.category}}</a>
+                        </li>
+
+                          {% endfor %}
+                        {% endblock label %}
